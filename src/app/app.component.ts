@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import axios from "axios";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,16 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'cousin-ernele';
+  randomData = "";
+
+  
+  constructor() {
+
+  }
+
+  async call() {
+    const response = await axios.get('https://raw.githubusercontent.com/rreichel3/US-Stock-Symbols/main/amex/amex_tickers.json');
+    this.randomData = response.data[Math.floor(Math.random() * response.data.length)];
+  }
+
 }
